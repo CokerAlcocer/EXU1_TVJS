@@ -7,12 +7,9 @@ let config = {
 }
 let auxVolume = 0;
 
-console.log(config);
-
 const turnTV = () => {
     if(!config.status) {
         config.status = !config.status;
-        console.log(`TV encendida - status: ${config.status}`);
     } else {
         config = {
             status: !config.status,
@@ -20,9 +17,9 @@ const turnTV = () => {
             volume: 3,
             mute: false
         } 
-        console.log(`TV apagada - status: ${config.status}`);
     }
-    console.log(config);
+
+    printData();
 }
 
 const volumeUp = () => {
@@ -30,17 +27,18 @@ const volumeUp = () => {
         if(!config.mute) {
             if(config.volume < 10) {
                 config.volume += 1;
-                console.log(`Volúmen: ${config.volume}`);
             } else {
-                console.log(`El volúmen está al máximo - status: ${config.volume}`);
+                console.log(`El volúmen está al máximo`);
             }
         } else {
-            console.log(`La TV está muteada - mute: ${config.mute}`);
+            config.mute = !config.mute;
+            config.volume = auxVolume;
         }
     } else {
-        console.log(`La TV está apagada - status: ${config.status}`);
+        console.log(`La TV está apagada`);
     }
-    console.log(config);
+
+    printData();
 }
 
 const volumeDown = () => {
@@ -48,45 +46,46 @@ const volumeDown = () => {
         if(!config.mute) {
             if(config.volume > 0) {
                 config.volume -= 1;
-                console.log(`Volúmen: ${config.volume}`);
             } else {
-                console.log(`El volúmen está al mínimo - status: ${config.volume}`);
+                console.log(`El volúmen está al mínimo`);
             }   
         } else {
-            console.log(`La TV está muteada - mute: ${config.mute}`);
+            config.mute = !config.mute;
+            config.volume = auxVolume;
         }
     } else {
-        console.log(`La TV está apagada - status: ${config.status}`);
+        console.log(`La TV está apagada`);
     }
-    console.log(config);
+
+    printData();
 }
 
 const channelUp = () => {
     if(config.status) {
         if(config.channel < 100) {
             config.channel += 1;
-            console.log(`Canal: ${config.channel}`);
         } else {
-            console.log(`El canal está al máximo - status: ${config.channel}`);
+            console.log(`El canal está al máximo`);
         }
     } else {
-        console.log(`La TV está apagada - status: ${config.status}`);
+        console.log(`La TV está apagada`);
     }
-    console.log(config);
+
+    printData();
 }
 
 const channelDown = () => {
     if(config.status) {
         if(config.channel > 0) {
             config.channel -= 1;
-            console.log(`Canal: ${config.channel}`);
         } else {
-            console.log(`El canal está al mínimo - status: ${config.channel}`);
+            console.log(`El canal está al mínimo`);
         }
     } else {
-        console.log(`La TV está apagada - status: ${config.status}`);
+        console.log(`La TV está apagada`);
     }
-    console.log(config);
+
+    printData();
 }
 
 const mute = () => {
@@ -95,14 +94,21 @@ const mute = () => {
             config.mute = !config.mute;
             auxVolume = config.volume;
             config.volume = 0;
-            console.log(`TV muteada - volume: ${config.volume}`);
+            console.log(`TV muteada`);
         } else {
             config.mute = !config.mute;
             config.volume = auxVolume;
-            console.log(`TV con sonido - volume: ${config.volume}`);
+            console.log(`TV con sonido`);
         }
     } else {
-        console.log(`La TV está apagada - status: ${config.status}`);
+        console.log(`La TV está apagada`);
     }
-    console.log(config);
+
+    printData();
 }
+
+const printData = () => {
+    console.log(`estado: ${config.status ? "Encendida" : "Apagada"}\ncanal: ${config.channel}\nvolúmen: ${config.volume}\nmute: ${config.mute ? "Muteada" : "Con volumen"}`);
+}
+
+printData();
