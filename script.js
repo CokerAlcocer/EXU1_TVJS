@@ -72,6 +72,7 @@ const channelUp = () => {
     } else {
         console.log(`La TV está apagada - status: ${config.status}`);
     }
+    console.log(config);
 }
 
 const channelDown = () => {
